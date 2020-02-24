@@ -104,29 +104,11 @@ You can get that from [here](https://nodejs.org).
 
 ## Installing the template project
 
-**EITHER**
-
 Download this repo, change to the directory and type:
 
 ```shell
 npm install
 ```
-
-**OR**
-
-Make a directory and change to it
-
-```shell
-npm install babel-playcanvas-template
-```
-
-Now in `[YOUR_DIRECTORY]/node_modules/babel-playcanvas-template` are all of the files you need.  Either
-develop in there or copy that whole directory structure somewhere you want to develop.
-
-The entry point - which is where you will import your own code - is in `src/main.js`
-
-In the template this imports a bunch of PlayCanvas extensions and then a single
-`example.js` script that uses a couple of ES6 features for a demo.
 
 ## Writing your own code
 
@@ -195,7 +177,8 @@ click on the "PARSE" button in the Asset properties when main.build.js is select
 
 Also, if you do integrate any view layer like React/Vue,etc. or any other 3rd party JS that affects the DOM,
 make sure you defer any initialization of such codes via a respective on-stage Playcanvas entity script handler, or
-do an environment check to see it isn't running in any Playcanvas editor worker or something prior to initialization eg. `(typeof window === 'object' && typeof importScripts !== 'function')`
+do an environment check to see it isn't running in any Playcanvas editor worker or something prior to initialization
+eg in main.js. `(typeof window === 'object' && typeof importScripts !== 'function')`
 
 ### Local serving your development build
 
