@@ -29,19 +29,7 @@ class Example extends ScriptTypeBase  {
         // Use the on() method to attach event handlers.
         // The mouse object supports events on move, button down and
         // up, and scroll wheel.
-        this.app.mouse.on(pc.EVENT_MOUSEMOVE, this.onMouseMove, this);
         this.app.mouse.on(pc.EVENT_MOUSEDOWN, this.onMouseDown, this);
-    }
-
-    onMouseMove(event: pc.MouseEvent) {
-        // Use the camera component's screenToWorld function to convert the
-        // position of the mouse into a position in 3D space
-        var depth = 10;
-        var cameraEntity = this.app.root.findByName('Camera') as pc.Entity;
-        cameraEntity.camera.screenToWorld(event.x, event.y, depth, this.pos);
-
-        // Finally update the cube's world-space position
-        this.entity.setPosition(this.pos);
     }
 
    onMouseDown(event: pc.MouseEvent) {
