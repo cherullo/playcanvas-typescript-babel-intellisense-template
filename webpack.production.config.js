@@ -1,11 +1,16 @@
 const webpack = require('webpack');
 const path = require('path');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const PlayCanvasWebpackPlugin = require('playcanvas-webpack-plugin');
 const configuration = require('./config.json');
 
 configuration.browsers = configuration.browsers || "> 1%";
 
 module.exports = {
+    externals: {
+        //jquery: 'jQuery',
+        playcanvas: 'pc'
+    },
     entry: {
         main: './src/main.js'
     },
@@ -22,10 +27,18 @@ module.exports = {
                 "main.build.js": {path: "main.build.js", assetId: configuration.assetId}
             }
         }),
-        new webpack.optimize.UglifyJsPlugin({sourceMap: true})
+        new UglifyJsPlugin({sourceMap: true})
     ],
     devtool: 'source-map',
+    resolve: {
+        // Add `.ts` and `.tsx` as a resolvable extension.
+        extensions: ['.ts', '.tsx', '.js']
+    },
     module: {
+        rules: [
+            // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
+            { test: /\.tsx?$/, loader: 'ts-loader' }
+        ],
         loaders: [{
             test: /\.js$/,
             loader: 'babel-loader',

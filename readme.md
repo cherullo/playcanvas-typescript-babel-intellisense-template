@@ -1,12 +1,27 @@
+# 1st Forker's Note (Tobias Wehrum)
+
+Hey folks! This is a fork of [https://github.com/whydoidoit/babel-playcanvas-template](https://github.com/whydoidoit/babel-playcanvas-template) made by the amazing [whydoidoit](https://github.com/whydoidoit). Unfortunately it seems that over the last 2 years some things broke, and since it seems he is not maintaining the repository anymore I decided to spend a few minutes to make the minimal necessary changes.
+
+Note that the tools used (e.g. Babel, Webpack etc.) are also out of date, but they *work* and I don't have enough time at the moment to update them. Feel free to send a pull request if you do!
+
+Apart from this note and the chapters "Deprecated Methods", "Setting up Redirector (Chrome only)" and a small change in "HTTPS serving", this document is completely written by whydoidoit.
+
+Also shoutout to [thisredone](https://github.com/thisredone/coffeescript-playcanvas-template) from whom I stole the Redirector instructions!
+
+# 2nd Forker's Note (Glidias)
+
+Some minor dependency changes to get Typescript (>=2.7) supported as well with additional improvements to intellisense and type definitions.
+Will see if Babel/Webpack (alongside Typescript) can be upgraded.
+
 # Introduction
 
 This is a template project for using ES6 via Babel and WebPack to build [PlayCanvas](https://playcanvas.com) projects.
 
-PlayCanvas is a fantastic open source WebGL Engine and online Editor (which you can get access to for free or pay for 
-an organisational license).  
+PlayCanvas is a fantastic open source WebGL Engine and online Editor (which you can get access to for free or pay for
+an organisational license).
 
 PlayCanvas have developed a shared model that means you can edit your 3D scenes as a collaborative experience with
-team mates around the office, or around the world - it's great.  They have applied the same to code editing, which 
+team mates around the office, or around the world - it's great.  They have applied the same to code editing, which
 is fine for some use cases but imposes certain limitations:
 
 * No offline access to source code
@@ -21,21 +36,21 @@ All of this means that it is hard to choose PlayCanvas for serious development p
 and that loses you many of the advantages of having a fantastic online editor and layout tool.  So now why choose
 PlayCanvas when Three.js would give you just as much if not more?
 
-The answer has to be to produce code in a proper offline build environment with all the advantages of Babel, WebPack, 
+The answer has to be to produce code in a proper offline build environment with all the advantages of Babel, WebPack,
 NPM et al and still be able to use the output in the PlayCanvas online Editor.  As no one had done this, and I needed
-it for a number of projects I took on the task myself.  This has lead to a number of NPM repos and a WebPackPlugin that 
+it for a number of projects I took on the task myself.  This has lead to a number of NPM repos and a WebPackPlugin that
 automate most of the process.
 
 ## Why ES6
 
 If you are asking why you should use ES6 and Babel then I'd say it's for one simple reason: a programming language
-should try to get the hell out of your way and let you express what you want.  
+should try to get the hell out of your way and let you express what you want.
 
-When we code Javascript for WebGL we are coding for the browser and nearly everything that touches the outside world 
-will be async.  Expressing async in traditional Javascript is messy as hell.  Try writing a for-next loop that loads 
+When we code Javascript for WebGL we are coding for the browser and nearly everything that touches the outside world
+will be async.  Expressing async in traditional Javascript is messy as hell.  Try writing a for-next loop that loads
 a list of things from the web in sequence using Promises or callbacks and it will become immediately obvious.  With
 Babel and ES6 it's just a loop.  Everything else is a christmas tree.  Yes it's possible, but it's easy to have a
-hard to spot bug, so you do LESS of it than you would otherwise and refactoring is a scary prospect.  That's not 
+hard to spot bug, so you do LESS of it than you would otherwise and refactoring is a scary prospect.  That's not
 right.  That's damaging your creativity to my mind.
 
 ```javascript
@@ -53,7 +68,7 @@ async function getData() {
 
 ```
 
-I know this is a contrived example, but this "kind of thing" happens all of the time in my developments, and they 
+I know this is a contrived example, but this "kind of thing" happens all of the time in my developments, and they
 are better for me being able to implement them easily. Write that as just promises or callbacks and it will be illegible
 to most developers without a lot of study.
 
@@ -78,7 +93,7 @@ WebPack is going to make building all of this and serving it to your browser an 
 
 # Getting Started
 
-The shortest way to get started is really simple. 
+The shortest way to get started is really simple.
 
 ## Prerequisites
 
@@ -109,16 +124,16 @@ develop in there or copy that whole directory structure somewhere you want to de
 
 The entry point - which is where you will import your own code - is in `src/main.js`
 
-In the template this imports a bunch of PlayCanvas extensions and then a single 
+In the template this imports a bunch of PlayCanvas extensions and then a single
 `example.js` script that uses a couple of ES6 features for a demo.
 
 ## Writing your own code
 
 Create a file in `src` or a sub directory and script what you like.  Just make sure that it is imported
-by `main.js` (note that paths are relative to `src` and must start with a `./`).  
+by `main.js` (note that paths are relative to `src` and must start with a `./`).
 When you start developing things that import each other, you just need
 to make sure that something in `main.js` imports something that imports the code you
-add!  
+add!
 
 If you find that something didn't show up, that's probably why.
 
@@ -132,7 +147,7 @@ of your code to PlayCanvas, but to start with, just copy the example to `config.
 
 You can build your code using either `webpack` or an automated process with `npm`.
 
-So typing `npm run build` in the root folder of the project (the parent of `src`) 
+So typing `npm run build` in the root folder of the project (the parent of `src`)
 the template will build a production version of your code into the `build` folder.
 
 **Either** build your code with NPM
@@ -148,7 +163,7 @@ webpack --config webpack.production.config.js
 The output file will be called `main.build.js`.  To use that in PlayCanvas just drag and drop
 it onto the PlayCanvas editor for your project.
 
-Now open your developer tools in the browser with the PlayCanvas Editor open and in 
+Now open your developer tools in the browser with the PlayCanvas Editor open and in
 the Javascript console type
 
 ```javascript
@@ -165,38 +180,60 @@ config.project.id
 
 And put that in the project id part of `config.json`
 
-Finally if you haven't already done it, drag `main.build.js` and drop it in the PlayCanvas assets window.  
+Finally if you haven't already done it, drag `main.build.js` and drop it in the PlayCanvas assets window.
 
-When it's imported click on it and in the properties window on the right, take it's ID and put that in 
+When it's imported click on it and in the properties window on the right, take it's ID and put that in
 `config.json` as your assetId.
 
-Now every time you run `npm run build` it will upload the result to PlayCanvas for you. 
+Now every time you run `npm run build` it will upload the result to PlayCanvas for you.
+
+### General workflow notes (Glidias)
+
+To ensure Playcanvas editors validates & re-initializes any script editor properties of all your uploaded scripts within your bundle main.build.js,
+click on the "PARSE" button in the Asset properties when main.build.js is selected in the Asset library.
+
+Also, if you do integrate any view layer like React/Vue,etc. or any other 3rd party JS that affects the DOM,
+make sure you defer any initialization of such codes via a respective on-stage Playcanvas entity script handler, or
+do an environment check to see it isn't running in any Playcanvas editor worker or something prior to initialization eg. `(typeof window === 'object' && typeof importScripts !== 'function')`
+
 
 ### Local serving your development build
 
 There's a better way to do ongoing development though, you only really need to upload your build when
 the attributes of something change, you add a new script or you want to publish your build.
 
-This template project has a solution for that too.  You will be able to see all of your 
+This template project has a solution for that too.  You will be able to see all of your
 source code in your developer tools when you use any means of making a `development` build.
 
-#### Loading Screen Method
+#### Deprecated Methods (Tobias Wehrum)
 
-If you have a loading screen or can make one then you can use either the whole script in
-`utility-scripts/loading_screen_scripts_2_0.js` or add the `utility-scripts/exerpt.js` to
-the top of your own.  
+Previously two deprecated methods of locally serving a development build were described here: *Loading Screen Method* and *PlayCanvas Script Method*. As far as I can see, neither work anymore. (Possibly due to ``pc.Asset.prototype.getFileUrl`` not being used anymore for loading scripts, but that is pure conjecture on my part.)
 
-This will allow you to serve files locally if you add a `?local=http://localhost:8081` to 
-your launch url query string **AND** you change the protocol of the launch page to be `http`. 
-If you really need `https` then see the section later on how to do that instead.
+#### Setting up Redirector (Chrome only) (edited Glidias)
 
-#### PlayCanvas Script Method
+- Download the [Redirector](https://chrome.google.com/webstore/detail/redirector/ocgpenflpmgnfapjedencafcfakcekcd?hl=en) chrome extension.
+THe objective is to redirect certain request files/folders/etc. to access from your localhost instead. Make sure the http protocols are the same (eg. For convenience, if redirecting to http localhost, use redirection on http protocol as well on the playcanvas launch url). HTTPS may need a bit more effort to set up (see last section).
 
-This is less reliable.  Create a script in PlayCanvas Editor.  Copy `utility-scripts/exerpt.js`
-into it and set it's loading order to be before `main.build.js`.
+- Here are some examples redirects: (depending on where you place your files under `assets/files/`, you might need to change this accordingly to decide exactly what to redirect!)
 
-See the instruction about the URL in the previous section on how to modify your launch to use
-it.
+    1.  For only syncing main.build.js file only (on asset root)
+        **Example URL**: `http://launch.playcanvas.com/api/assets/files/main.build.js?id=11217398&branchId=00465776-6b83-4f4c-af75-01c351769fa8`
+        **Include pattern**: `http:\/\/launch\.playcanvas\.com\/api\/assets\/files\/(main\.build\.js)\?(.*)`
+        **Redirect to**: `http://localhost:8081/$1?$2`
+        **Pattern type**: Regular Expression
+         In advanced options:
+        **Apply to**: Scripts and XMLHttpRequests (Ajax)
+     2. OR For all script files (including main.build.js) (on asset root)
+        **Example URL**: `http://launch.playcanvas.com/api/assets/files/blahblah.js?id=11217398&branchId=00465776-6b83-4f4c-af75-01c351769fa8`
+        **Include pattern**: `http:\/\/launch\.playcanvas\.com\/api\/assets\/files\/(.+\.js)\?(.*)`
+        **Redirect to**: `http://localhost:8081/$1?$2`
+        **Pattern type**: Regular Expression
+        In advanced options:
+        **Apply to**: Scripts and XMLHttpRequests (Ajax)
+
+After starting the server in the next step, you can open [http://launch.playcanvas.com/%7BprojectId%7D?debug=true](http://launch.playcanvas.com/%7BprojectId%7D?debug=true) (so the same URL as you'd regularely do, but with http instead of https) and all script files will be used from your local server instead of the files uploaded on the PlayCanvas servers.
+
+Note that while Redirector is active, depending on the type of redirects you do, any requests matching the above patterns are redirected to your local server, even if you are not running your local server and even for projects hosted at [http://launch.playcanvas.com](launch.playcanvas.com) that you don't even want to run locally. Be sure to turn Redirector off or use https URLs in those cases.
 
 #### Starting the server
 
@@ -227,7 +264,7 @@ You can just use NPM like normal.  Basically find the module you need and type
 npm install --save <module-name>
 ```
 
-You can then import it into the file you need it in by adding an `import` statement at the 
+You can then import it into the file you need it in by adding an `import` statement at the
 top of your file.
 
 ```javascript
@@ -235,7 +272,7 @@ import blah from 'blah-module';
 
 ...
 
-blah(something); 
+blah(something);
 
 ```
 
@@ -250,7 +287,7 @@ which means that the output code will work on `99%` of browsers in the field.
 
 If you set it to `last 2 Chrome versions` then a lot more of ES6 is implemented
 already and there will be less work done, so a smaller output file
-(and possibly some code could be faster).  
+(and possibly some code could be faster).
 
 Using this method you could actually create multiple builds and choose between them.
 
@@ -280,13 +317,13 @@ are warned it isn't safe, just proceed anyway. This will mean that you always se
 launch page is untrusted and may cause other issues, it's normally fine for me.
 
 * Or: get your browser to trust `node_modules/webpack-dev-server/ssl/server.pem`. This can be
-easier said than done.  You can also replace `server.pem` with your own trusted `localhost` 
-certificate.  Just you'll have to pack it as a `.pem` file. (On Apple by default it will be a `.p12`, 
+easier said than done.  You can also replace `server.pem` with your own trusted `localhost`
+certificate.  Just you'll have to pack it as a `.pem` file. (On Apple by default it will be a `.p12`,
 Google for how to change it).
 
-**Don't forget to change your launch URL and the local parameter `?local=http://localhost:8081` to HTTPS!!**
+**Don't forget to change your launch URL to HTTPS and add/change the Redirector rules to support HTTPS!!**
 
 Personally I've used [Certificate Tools](https://certificatetools.com) to make certs that work. Make sure you sent the `Subject
 Alternative Name(s) DNS` to `localhost` **as well as** `Common Names`.  It also provides you with a thing
 to run to pack .p12 into a .pem after you've generated your certificate.  It only took me about 5 tries
-to work out what I had to do with it! 
+to work out what I had to do with it!

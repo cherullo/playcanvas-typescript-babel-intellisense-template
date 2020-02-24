@@ -6,6 +6,10 @@ const configuration = require('./config.json');
 configuration.browsers = configuration.browsers || "> 1%";
 
 module.exports = {
+    externals: {
+        //jquery: 'jQuery',
+        playcanvas: 'pc'
+    },
     entry: {
         main: './src/main.js'
     },
@@ -14,6 +18,7 @@ module.exports = {
         filename: '[name].build.js'
     },
     plugins: [
+        /*
         new PlayCanvasWebpackPlugin({
             skipUpload: process.env.UPLOAD === "no" || !configuration.bearer || configuration.bearer.length != 32,
             bearer: configuration.bearer,
@@ -22,8 +27,9 @@ module.exports = {
                 "main.build.js": {path: "main.build.js", assetId: configuration.assetId}
             }
         })
+        */
     ],
-    devtool: '#inline-source-map',
+    devtool: 'inline-source-map',
     devServer: {
         contentBase: './build',
         hot: true,
@@ -36,7 +42,15 @@ module.exports = {
             "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
         }
     },
+    resolve: {
+        // Add `.ts` and `.tsx` as a resolvable extension.
+        extensions: ['.ts', '.tsx', '.js']
+    },
     module: {
+        rules: [
+            // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
+            { test: /\.tsx?$/, loader: 'ts-loader' }
+        ],
         loaders: [{
             test: /\.js$/,
             exclude: /node_modules/,

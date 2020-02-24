@@ -1,32 +1,29 @@
 //See reference project https://playcanvas.com/project/504134/overview/test-es6
 
-import {V} from 'playcanvas-working-vectors';
-import delay from 'playcanvas-delay'
-import timeout from 'playcanvas-timeout'
+const pc = require("playcanvas");
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
+
 
 const Example = pc.createScript('example');
-Example.attributes.set({
 
-    message: pc.attr.string.default("Default Message")
-
-});
-
-//Extended construction function called even if not enabled
+/**
+ * Hmm.. augments won't work though for intellisense.
+ * https://github.com/microsoft/TypeScript/issues/30943
+ * @augments pc.ScriptType
+ */
 Example.prototype.construct = function () {
-    console.log("constructed")
-    this.startLogging = false
-    timeout(() => this.entity.enabled = true, 1000)
+    /** @type {pc.ScriptType} */ const the = this;
+    // using "the" instead of "this" for intellisense? Lol.
+    alert('a');
 }
 
 //Support for async functions
 Example.prototype.initialize = async function() {
-    console.log("Starting", this.startLogging)
-    await delay(1000)
-    console.log("Delayed")
-    await delay(20000)
-    this.startLogging = true
+   console.log("INitialize;");
+   alert('b');
 }
 
 Example.prototype.update = function (dt) {
-    if (this.startLogging) console.log(this.message, dt, V(this.entity.getPosition()).scale(0.5).data);
+
 };
+
