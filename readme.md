@@ -11,6 +11,7 @@ Also shoutout to [thisredone](https://github.com/thisredone/coffeescript-playcan
 # 2nd Forker's Note (Glidias)
 
 2020 Update: Some minor dependency changes to get Typescript (but only >=2.7) supported as well with additional improvements to intellisense and type definitions.
+Typescript aspects has been adjusted to adopt DRY and better type-checking whenever possible.
 Will see if Babel/Webpack (alongside Typescript) can be upgraded but it's working as of now.
 
 # Introduction
@@ -195,7 +196,6 @@ click on the "PARSE" button in the Asset properties when main.build.js is select
 Also, if you do integrate any view layer like React/Vue,etc. or any other 3rd party JS that affects the DOM,
 make sure you defer any initialization of such codes via a respective on-stage Playcanvas entity script handler, or
 do an environment check to see it isn't running in any Playcanvas editor worker or something prior to initialization eg. `(typeof window === 'object' && typeof importScripts !== 'function')`
-
 
 ### Local serving your development build
 

@@ -1,30 +1,13 @@
-import { createScript, ScriptTypeBase } from "../lib/create-script-decorator";
+import { createScript, ScriptTypeBase, attrib } from "../lib/create-script-decorator";
 import * as pc from "playcanvas";
 
 @createScript("example")
 class Example extends ScriptTypeBase  {
 
-    redMaterial: pc.Asset;
-    greenMaterial: pc.Asset;
-    blueMaterial: pc.Asset;
-    constructor () {
-         // optional constructor to define "attributesData" with intellisense
-        super();
-        this.attributesData = {
-            redMaterial: {
-                type: 'asset',
-                assetType: 'material'
-            },
-            greenMaterial: {
-                type: 'asset',
-                assetType: 'material'
-            },
-            blueMaterial: {
-                type: 'asset',
-                assetType: 'material'
-            }
-        };
-    }
+    // Careful, manual string reflection type would have to assumably match type definition, violating DRY somewhat.
+    @attrib({type:'asset', assetType: 'material'}) redMaterial: pc.Asset;
+    @attrib({type:'asset', assetType: 'material'}) greenMaterial: pc.Asset;
+    @attrib({type:'asset', assetType: 'material'}) blueMaterial: pc.Asset;
 
     pos: pc.Vec3;
 
