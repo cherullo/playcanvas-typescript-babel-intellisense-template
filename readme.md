@@ -201,16 +201,27 @@ THe objective is to redirect certain request files/folders/etc. to access from y
 
     1.  For only syncing main.build.js file only (on asset root)
         **Example URL**: `http://launch.playcanvas.com/api/assets/files/main.build.js?id=11217398&branchId=00465776-6b83-4f4c-af75-01c351769fa8`
+
         **Include pattern**: `http:\/\/launch\.playcanvas\.com\/api\/assets\/files\/(main\.build\.js)\?(.*)`
+
         **Redirect to**: `http://localhost:8081/$1?$2`
+
         **Pattern type**: Regular Expression
+
          In advanced options:
+
         **Apply to**: Scripts and XMLHttpRequests (Ajax)
-     2. OR For all script files (including main.build.js) (on asset root)
+
+    2. OR For all script files (including main.build.js) (on asset root)
+
         **Example URL**: `http://launch.playcanvas.com/api/assets/files/blahblah.js?id=11217398&branchId=00465776-6b83-4f4c-af75-01c351769fa8`
+
         **Include pattern**: `http:\/\/launch\.playcanvas\.com\/api\/assets\/files\/(.+\.js)\?(.*)`
+
         **Redirect to**: `http://localhost:8081/$1?$2`
+
         **Pattern type**: Regular Expression
+
         In advanced options:
         **Apply to**: Scripts and XMLHttpRequests (Ajax)
 
