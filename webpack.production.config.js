@@ -39,7 +39,7 @@ module.exports = {
             // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
             { test: /\.tsx?$/, loader: 'ts-loader' }
         ],
-        loaders: [{
+        loaders: [/*{
             test: /\.js$/,
             loader: 'babel-loader',
             query: {
@@ -76,7 +76,7 @@ module.exports = {
         }, {
             test: /\.glsl$/,
             use: [{loader: 'raw-loader'}]
-        }]
+        }*/]
     }
 };
 
