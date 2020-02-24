@@ -12,7 +12,7 @@ module.exports = {
         playcanvas: 'pc'
     },
     entry: {
-        main: './src/main.js'
+        main: './src/main.ts'
     },
     output: {
         path: path.resolve(__dirname, 'build'),
