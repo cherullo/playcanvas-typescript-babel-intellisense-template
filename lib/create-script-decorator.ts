@@ -36,7 +36,6 @@ export function createScript(name: string) {
 
 export function attrib<T>(params: AttributeParams):any {
     return function (target: ScriptTypeBase, propertyKey: string, descriptor: TypedPropertyDescriptor<T>):any {
-        console.log(target, propertyKey, descriptor);
         if (!target.attributesData) {
             target.attributesData = {};
         }
