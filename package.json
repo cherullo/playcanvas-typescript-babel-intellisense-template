@@ -46,11 +46,6 @@
     "dependencies": {
         "babel-plugin-transform-runtime": "^6.23.0",
         "babel-polyfill": "^6.26.0",
-        "javascript-dual-inherit": "^1.0.0",
-        "playcanvas": "^1.24.7",
-        "search-to-parameters": "^1.0.0",
-        "temporary-object-pooling": "^1.0.1",
-        "whydoidoit-resolver": "^1.0.0",
-        "whydoidoit-sign": "^1.0.0"
+        "playcanvas": "^1.24.7"
     }
 }
