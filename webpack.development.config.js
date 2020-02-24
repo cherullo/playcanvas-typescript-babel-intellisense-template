@@ -18,7 +18,6 @@ module.exports = {
         filename: '[name].build.js'
     },
     plugins: [
-        /*
         new PlayCanvasWebpackPlugin({
             skipUpload: process.env.UPLOAD === "no" || !configuration.bearer || configuration.bearer.length != 32,
             bearer: configuration.bearer,
@@ -27,7 +26,6 @@ module.exports = {
                 "main.build.js": {path: "main.build.js", assetId: configuration.assetId}
             }
         })
-        */
     ],
     devtool: 'inline-source-map',
     devServer: {
