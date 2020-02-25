@@ -225,6 +225,18 @@ THe objective is to redirect certain request files/folders/etc. to access from y
         In advanced options:
         **Apply to**: Scripts and XMLHttpRequests (Ajax)
 
+    3.  For hot module reloading (HMR)
+        Example URL: http://launch.playcanvas.com/191247d10e518c420782.hot-update.json
+
+        **Include pattern:** http://launch.playcanvas.com/(.*).hot-update.(js|json)$
+
+        **Redirect to:** http://localhost:8081/$1.hot-update.$2
+
+        **Pattern type:** Regular Expression
+
+        In advanced options:
+        **Apply to:** Scripts and XMLHttpRequests (Ajax)
+
 After starting the server in the next step, you can open [http://launch.playcanvas.com/%7BprojectId%7D?debug=true](http://launch.playcanvas.com/%7BprojectId%7D?debug=true) (so the same URL as you'd regularely do, but with http instead of https) and all script files will be used from your local server instead of the files uploaded on the PlayCanvas servers.
 
 Note that while Redirector is active, depending on the type of redirects you do, any requests matching the above patterns are redirected to your local server, even if you are not running your local server and even for projects hosted at [http://launch.playcanvas.com](launch.playcanvas.com) that you don't even want to run locally. Be sure to turn Redirector off or use https URLs in those cases.
