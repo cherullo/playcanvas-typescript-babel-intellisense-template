@@ -1,10 +1,11 @@
 const webpack = require('webpack');
 const path = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const PlayCanvasWebpackPlugin = require('playcanvas-webpack-plugin');
 const configuration = require('./config.json');
-
 configuration.browsers = configuration.browsers || "> 1%";
+
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
     mode: 'production',
@@ -13,13 +14,18 @@ module.exports = {
         playcanvas: 'pc'
     },
     entry: {
-        main: './src/main.ts'
+        main: './src/main.js'
+    },
+    optimization: {
+        minimize: true,
+        minimizer: [new TerserPlugin()],
     },
     output: {
         path: path.resolve(__dirname, 'build'),
         filename: '[name].build.js'
     },
     plugins: [
+        new VueLoaderPlugin(),
         new PlayCanvasWebpackPlugin({
             skipUpload: process.env.UPLOAD === "no" || !configuration.bearer || configuration.bearer.length != 32,
             bearer: configuration.bearer,
@@ -27,8 +33,7 @@ module.exports = {
             files: configuration.files || {
                 "main.build.js": {path: "main.build.js", assetId: configuration.assetId}
             }
-        }),
-        new UglifyJsPlugin({sourceMap: true})
+        })
     ],
     devtool: 'source-map',
     resolve: {
@@ -37,6 +42,27 @@ module.exports = {
     },
     module: {
         rules: [
+            { test: /\.js$/, use: 'babel-loader' },
+            { test: /\.vue$/, use: 'vue-loader' },
+            {
+                test: /\.css$/,
+                use: [
+                    'vue-style-loader',
+                    {
+                    loader: 'css-loader',
+                    options: { importLoaders: 1 }
+                    },
+                    'postcss-loader'
+                ]
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                  'vue-style-loader',
+                  'css-loader',
+                  'sass-loader'
+                ]
+            },
             // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
             { test: /\.tsx?$/, loader: 'ts-loader' }
         ]

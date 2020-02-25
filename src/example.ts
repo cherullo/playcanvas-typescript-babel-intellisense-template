@@ -14,7 +14,7 @@ class Example extends ScriptTypeBase  {
     initialize() {
         console.log("Hello initialize", this.entity, this.app);
         this.pos = new pc.Vec3();
-        alert('hello world example.tx!! '+ [this.entity, this.app]);
+        alert('hello world example.tx!!! '+ [this.entity, this.app]);
 
         if (!this.entity.model) {
             console.warn("Entity doesn't have example model to test! Exiting now!");

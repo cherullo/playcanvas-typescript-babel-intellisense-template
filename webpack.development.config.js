@@ -2,8 +2,10 @@ const webpack = require('webpack');
 const path = require('path');
 const PlayCanvasWebpackPlugin = require('playcanvas-webpack-plugin');
 const configuration = require('./config.json');
-
 configuration.browsers = configuration.browsers || "> 1%";
+
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+
 
 module.exports = {
     mode: 'development',
@@ -12,13 +14,14 @@ module.exports = {
         playcanvas: 'pc'
     },
     entry: {
-        main: './src/main.ts'
+        main: './src/main.js'
     },
     output: {
         path: path.resolve(__dirname, 'build'),
         filename: '[name].build.js'
     },
     plugins: [
+        new VueLoaderPlugin(),
         new PlayCanvasWebpackPlugin({
             skipUpload: process.env.UPLOAD === "no" || !configuration.bearer || configuration.bearer.length != 32,
             bearer: configuration.bearer,
@@ -31,7 +34,7 @@ module.exports = {
     devtool: 'inline-source-map',
     devServer: {
         contentBase: './build',
-        hot: true,
+        // hot: true,
         disableHostCheck: true,
         overlay: true,
         inline: true,
@@ -48,7 +51,27 @@ module.exports = {
     },
     module: {
         rules: [
-            // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
+            { test: /\.js$/, use: 'babel-loader' },
+            { test: /\.vue$/, loader: 'vue-loader', options: {hotReload: true} },
+            {
+                test: /\.css$/,
+                use: [
+                    'vue-style-loader',
+                    {
+                    loader: 'css-loader',
+                    options: { importLoaders: 1 }
+                    },
+                    'postcss-loader'
+                ]
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                  'vue-style-loader',
+                  'css-loader',
+                  'sass-loader'
+                ]
+            },
             { test: /\.tsx?$/, loader: 'ts-loader' }
         ]
     }

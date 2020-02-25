@@ -25,17 +25,28 @@
     },
     "homepage": "https://github.com/whydoidoit/babel-playcanvas-template#readme",
     "devDependencies": {
+        "@babel/core": "^7.8.4",
+        "@babel/preset-env": "^7.8.4",
+        "babel-loader": "^8.0.6",
         "cross-env": "^7.0.0",
+        "css-loader": "^3.4.2",
+        "node-sass": "^4.13.1",
         "playcanvas-webpack-plugin": "^1.0.8",
+        "postcss-loader": "^3.0.0",
+        "sass-loader": "^8.0.2",
         "source-map-loader": "^0.2.4",
+        "terser-webpack-plugin": "^2.3.5",
         "ts-loader": "^6.2.1",
         "typescript": "^3.8.2",
-        "uglifyjs-webpack-plugin": "^2.2.0",
+        "vue-loader": "^15.9.0",
+        "vue-style-loader": "^4.1.2",
+        "vue-template-compiler": "^2.6.11",
         "webpack": "^4.41.6",
         "webpack-cli": "^3.3.11",
         "webpack-dev-server": "^3.10.3"
     },
     "dependencies": {
-        "playcanvas": "^1.24.7"
+        "playcanvas": "^1.24.7",
+        "vue": "^2.6.11"
     }
 }
