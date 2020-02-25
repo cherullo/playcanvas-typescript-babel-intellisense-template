@@ -14,7 +14,8 @@ module.exports = {
         playcanvas: 'pc'
     },
     entry: {
-        main: './src/main.js'
+        main: './src/main.js',
+        app: './src/app.js'
     },
     optimization: {
         minimize: true,

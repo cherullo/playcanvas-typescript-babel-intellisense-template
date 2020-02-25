@@ -1,6 +1,6 @@
 <template>
 	<div class="hello">
-		<p>Hello World: {{key}} : {{value}}</p>
+		<p>Hello World!: {{key}} : {{value}}</p>
 	</div>
 </template>
 
@@ -12,7 +12,7 @@ export default {
 		}
 	},
 	created () {
-		console.log('VUE:: hello world!');
+		console.log('VUE:: hello world!!');
 	},
 	computed: {
 		value () {
@@ -25,7 +25,7 @@ export default {
 	.hello {
 		color:red;
 		position:absolute;
-		margin-top:10px;
+		margin-top:1px;
 		margin-left:10px;
 		// i need to appear in front of playcanvas!
 		z-index:999999;
