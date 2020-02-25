@@ -12,7 +12,7 @@ export default {
 		}
 	},
 	created () {
-		alert('hello world');
+		alert('hello worsld');
 	},
 	computed: {
 		value () {
