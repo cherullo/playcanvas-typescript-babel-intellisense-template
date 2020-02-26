@@ -12,7 +12,8 @@ Also shoutout to [thisredone](https://github.com/thisredone/coffeescript-playcan
 
 2020 Update: Some minor dependency changes to get Typescript (but only >=2.7) supported as well with additional improvements to intellisense and type definitions.
 Typescript aspects has been adjusted to adopt DRY and better type-checking whenever possible.
-Will see if Babel/Webpack (alongside Typescript) can be upgraded but it's working as of now.
+
+Be sure to check the other branches for more updated version setups.
 
 # Introduction
 
