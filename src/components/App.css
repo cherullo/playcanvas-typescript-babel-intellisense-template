@@ -1,0 +1,5 @@
+.App {
+	position:absolute;
+	z-index:99999;
+	color:blue;
+}

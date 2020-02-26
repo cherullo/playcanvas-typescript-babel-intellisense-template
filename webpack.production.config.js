@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const PlayCanvasWebpackPlugin = require('playcanvas-webpack-plugin');
 const configuration = require('./config.json');
 
@@ -12,8 +12,14 @@ module.exports = {
         //jquery: 'jQuery',
         playcanvas: 'pc'
     },
+    optimization: {
+        minimize: true,
+        minimizer: [new TerserPlugin({
+            sourceMap: true
+        })],
+    },
     entry: {
-        main: './src/main.ts'
+        main: './src/main.js'
     },
     output: {
         path: path.resolve(__dirname, 'build'),
@@ -27,18 +33,34 @@ module.exports = {
             files: configuration.files || {
                 "main.build.js": {path: "main.build.js", assetId: configuration.assetId}
             }
-        }),
-        new UglifyJsPlugin({sourceMap: true})
+        })
     ],
     devtool: 'source-map',
     resolve: {
-        // Add `.ts` and `.tsx` as a resolvable extension.
-        extensions: ['.ts', '.tsx', '.js']
+        modules: ['node_modules'],
+        extensions: ['.ts', '.tsx', '.js', '.jsx'],
     },
     module: {
         rules: [
-            // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
-            { test: /\.tsx?$/, loader: 'ts-loader' }
+            {
+                // Include ts, tsx, js, and jsx files.
+                test: /\.(tsx|js|jsx)?$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader',
+            },
+            {
+                test: /\.css$/, use: [ 'style-loader', 'css-loader' ]
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                  'style-loader',
+                  'css-loader',
+                  'sass-loader'
+                ]
+            },
+            // all files with a `.ts` extension will be handled by `ts-loader`
+            { test: /\.ts/, loader: 'ts-loader' }
         ]
     }
 };
