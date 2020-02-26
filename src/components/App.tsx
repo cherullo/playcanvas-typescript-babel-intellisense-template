@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './App.css';
 import Hello from './hello/Hello';
-import HelloJS from './hello/HelloJS';
+import HelloJS from './hello/HelloJS.jsx';
 
 import { hot } from 'react-hot-loader/root'
 
