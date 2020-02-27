@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const PlayCanvasWebpackPlugin = require('playcanvas-webpack-plugin');
 const configuration = require('./config.json');
 
@@ -19,6 +19,14 @@ module.exports = {
         path: path.resolve(__dirname, 'build'),
         filename: '[name].build.js'
     },
+    optimization: {
+        minimize: true,
+        minimizer: [
+            new TerserPlugin({
+                sourceMap: true,
+            }),
+        ],
+    },
     plugins: [
         new PlayCanvasWebpackPlugin({
             skipUpload: process.env.UPLOAD === "no" || !configuration.bearer || configuration.bearer.length != 32,
@@ -27,8 +35,7 @@ module.exports = {
             files: configuration.files || {
                 "main.build.js": {path: "main.build.js", assetId: configuration.assetId}
             }
-        }),
-        new UglifyJsPlugin({sourceMap: true})
+        })
     ],
     devtool: 'source-map',
     resolve: {
