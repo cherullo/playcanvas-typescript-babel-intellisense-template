@@ -1,3 +1,6 @@
+Vue. With multiple entry files. (2 files, 1 for UI eg. `app.build.js`, the other main entry with playcanvas components in `main.build.js`). Hot module Reload for UI components working fine. 
+Use --hot-only option, if you don't want auto-refreshing of browser as a result of altering core main.build.js consisting of file.
+
 # 1st Forker's Note (Tobias Wehrum)
 
 Hey folks! This is a fork of [https://github.com/whydoidoit/babel-playcanvas-template](https://github.com/whydoidoit/babel-playcanvas-template) made by the amazing [whydoidoit](https://github.com/whydoidoit). Unfortunately it seems that over the last 2 years some things broke, and since it seems he is not maintaining the repository anymore I decided to spend a few minutes to make the minimal necessary changes.
