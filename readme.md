@@ -1,3 +1,5 @@
+React. With Hot module Reload for UI components working fine.
+
 # 1st Forker's Note (Tobias Wehrum)
 
 Hey folks! This is a fork of [https://github.com/whydoidoit/babel-playcanvas-template](https://github.com/whydoidoit/babel-playcanvas-template) made by the amazing [whydoidoit](https://github.com/whydoidoit). Unfortunately it seems that over the last 2 years some things broke, and since it seems he is not maintaining the repository anymore I decided to spend a few minutes to make the minimal necessary changes.
