@@ -1,4 +1,4 @@
-React. With Hot module Reload for UI components working fine.
+React. With Hot module Reload for UI components working fine. Use `--hot-only` option, if you don't want auto-refreshing of browser as a result of altering your Playcanvas scripts.
 
 # 1st Forker's Note (Tobias Wehrum)
 
