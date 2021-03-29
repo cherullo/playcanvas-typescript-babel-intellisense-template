@@ -1,4 +1,5 @@
 import { createScript, ScriptTypeBase, attrib } from "../lib/create-script-decorator";
+import * as pc from "playcanvas";
 
 @createScript("example")
 class Example extends ScriptTypeBase  {

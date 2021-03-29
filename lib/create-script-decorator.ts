@@ -1,4 +1,4 @@
-import { ScriptType } from "playcanvas";
+import * as pc from "playcanvas";
 
 /**
  * Class decorator allowing the use of ES6 classes
