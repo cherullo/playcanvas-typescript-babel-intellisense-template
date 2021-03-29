@@ -29,7 +29,7 @@
         "playcanvas-webpack-plugin": "^1.0.8",
         "source-map-loader": "^0.2.4",
         "ts-loader": "^6.2.1",
-        "typescript": "^3.8.2",
+        "typescript": "^4.2.3",
         "webpack": "^4.41.6",
         "webpack-cli": "^3.3.11",
         "webpack-dev-server": "^3.11.2"
