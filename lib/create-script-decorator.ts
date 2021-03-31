@@ -19,6 +19,11 @@ export function createScript(name: string) {
                 script.attributes.add(attr, instance.attributesData[attr])
             }
         }
+        else
+		{
+			instance.attributesData = [];
+		}
+        
         // Add instance properties and methods to prototype
         let proto = script.prototype;
         for (let prop in instance) {
